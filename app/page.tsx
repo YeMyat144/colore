@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { EyeIcon as EyeDropperIcon, UploadIcon, ClipboardCopy } from "lucide-react"
+import { EyeIcon as UploadIcon, ClipboardCopy } from "lucide-react"
 import ColorPickerCursor from "../components/ColorPickerCursor"
 
 export default function ImageColorPicker() {
