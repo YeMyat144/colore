@@ -7,9 +7,6 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Colore',
   description: 'Pick colors from uploaded images',
-  icons: {
-    icon: '/logo.png',
-  },
 }
 
 export default function RootLayout({
@@ -20,7 +17,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* You can also add meta tags like description, author, etc. */}
+        <link rel="icon" type="image/png" href="/logo.png" />
         <meta name="theme-color" content="#ffffff" />
       </head>
       <body className={inter.className}>{children}</body>
