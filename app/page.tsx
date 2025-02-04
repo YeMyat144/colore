@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { EyeIcon as UploadIcon, ClipboardCopy } from "lucide-react"
+import { UploadIcon, ClipboardCopy, RefreshCwIcon } from "lucide-react";
 import ColorPickerCursor from "../components/ColorPickerCursor"
 
 export default function ImageColorPicker() {
@@ -117,9 +117,8 @@ export default function ImageColorPicker() {
               <div className="mt-1 flex items-center space-x-2">
                 <Input type="file" id="fileUpload" onChange={handleFileUpload} accept="image/*" className="hidden" />
                 <Button onClick={() => document.getElementById("fileUpload")?.click()} variant="outline">
-                  <UploadIcon className="mr-2 h-4 w-4" /> Choose File
+                  <UploadIcon className=" h-4 w-4" /> Choose File
                 </Button>
-                <span className="text-sm text-gray-500">{imageUrl ? "File selected" : "No file chosen"}</span>
               </div>
             </div>
             {imageUrl && (
@@ -159,7 +158,7 @@ export default function ImageColorPicker() {
             className="ml-2 p-1 text-sm bg-gray-200 rounded flex items-center"
             onClick={() => copyToClipboard(lockedColor.hex)}
           >
-            <ClipboardCopy className="w-4 h-4 mr-1" /> Copy
+            <ClipboardCopy className="w-4 h-4 mr-1" /> 
           </button>
         </p>
         <p className="font-mono text-lg flex items-center">
@@ -168,17 +167,17 @@ export default function ImageColorPicker() {
             className="ml-2 p-1 text-sm bg-gray-200 rounded flex items-center"
             onClick={() => copyToClipboard(lockedColor.rgb)}
           >
-            <ClipboardCopy className="w-4 h-4 mr-1" /> Copy
+            <ClipboardCopy className="w-4 h-4 mr-1" /> 
           </button>
         </p>
       </div>
     </div>
-    <button
-      className="mt-4 px-4 py-2 bg-black text-white rounded hover:text-gray transition"
+    <br />
+    <Button variant="outline"
       onClick={() => setLockedColor(null)}
     >
-      Reset
-    </button>
+      <RefreshCwIcon/>Reset
+    </Button>
   </div>
 )}
 
