@@ -92,7 +92,7 @@ export default function ImageColorPicker() {
       <Card className="w-full max-w-5xl">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">
-            Colore
+            HueSeek
           </CardTitle>
         </CardHeader>
         <CardContent>
