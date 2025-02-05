@@ -89,7 +89,7 @@ export default function ImageColorPicker() {
 
   return (
     <div className="container mx-auto min-h-full flex items-center justify-center w-full">
-      <Card className="w-full max-w-5xl">
+      <Card className="w-full max-w-5xl border-none shadow-none">
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">
             HueSeek
