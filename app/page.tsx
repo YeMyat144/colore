@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { UploadIcon, ClipboardCopy, RefreshCwIcon } from "lucide-react";
+import { UploadIcon, ClipboardCopy } from "lucide-react";
 import ColorPickerCursor from "../components/ColorPickerCursor"
 
 export default function ImageColorPicker() {
@@ -60,7 +60,7 @@ export default function ImageColorPicker() {
 
   const handleCanvasClick = () => {
     if (color) {
-      setLockedColor(color) // Lock the color on click
+      setLockedColor((prev) => (prev?.hex === color.hex ? null : color)) // Toggle selection
     }
   }
 
@@ -82,6 +82,11 @@ export default function ImageColorPicker() {
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text)
     alert(`Copied: ${text}`)
+    
+    // Auto-reset locked color after 1.5 seconds
+    setTimeout(() => {
+      setLockedColor(null);
+    }, 1500);
   }
 
   const handleMouseEnter = () => setShowCustomCursor(true)
@@ -117,7 +122,7 @@ export default function ImageColorPicker() {
               <div className="mt-1 flex items-center space-x-2">
                 <Input type="file" id="fileUpload" onChange={handleFileUpload} accept="image/*" className="hidden" />
                 <Button onClick={() => document.getElementById("fileUpload")?.click()} variant="outline">
-                  <UploadIcon className=" h-4 w-4" /> Choose File
+                  <UploadIcon className="h-4 w-4" /> Choose File
                 </Button>
               </div>
             </div>
@@ -144,43 +149,36 @@ export default function ImageColorPicker() {
               </div>
             )}
             {lockedColor && (
-  <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
-    <h2 className="text-xl font-semibold mb-2">Selected Color:</h2>
-    <div className="flex items-center space-x-4">
-      <div
-        className="w-20 h-20 rounded-full border-4 border-white shadow-lg"
-        style={{ backgroundColor: lockedColor.hex }}
-      ></div>
-      <div>
-        <p className="font-mono text-lg flex items-center">
-          HEX: {lockedColor.hex}
-          <button
-            className="ml-2 p-1 text-sm bg-gray-200 rounded flex items-center"
-            onClick={() => copyToClipboard(lockedColor.hex)}
-          >
-            <ClipboardCopy className="w-4 h-4 mr-1" /> 
-          </button>
-        </p>
-        <p className="font-mono text-lg flex items-center">
-          RGB: {lockedColor.rgb}
-          <button
-            className="ml-2 p-1 text-sm bg-gray-200 rounded flex items-center"
-            onClick={() => copyToClipboard(lockedColor.rgb)}
-          >
-            <ClipboardCopy className="w-4 h-4 mr-1" /> 
-          </button>
-        </p>
-      </div>
-    </div>
-    <br />
-    <Button variant="outline"
-      onClick={() => setLockedColor(null)}
-    >
-      <RefreshCwIcon/>Reset
-    </Button>
-  </div>
-)}
-
+              <div className="mt-6 p-4 bg-white rounded-lg shadow-md">
+                <h2 className="text-xl font-semibold mb-2">Selected Color:</h2>
+                <div className="flex items-center space-x-4">
+                  <div
+                    className="w-20 h-20 rounded-full border-4 border-white shadow-lg"
+                    style={{ backgroundColor: lockedColor.hex }}
+                  ></div>
+                  <div>
+                    <p className="font-mono text-lg flex items-center">
+                      HEX: {lockedColor.hex}
+                      <button
+                        className="ml-2 p-1 text-sm bg-gray-200 rounded flex items-center"
+                        onClick={() => copyToClipboard(lockedColor.hex)}
+                      >
+                        <ClipboardCopy className="w-4 h-4 mr-1" /> 
+                      </button>
+                    </p>
+                    <p className="font-mono text-lg flex items-center">
+                      RGB: {lockedColor.rgb}
+                      <button
+                        className="ml-2 p-1 text-sm bg-gray-200 rounded flex items-center"
+                        onClick={() => copyToClipboard(lockedColor.rgb)}
+                      >
+                        <ClipboardCopy className="w-4 h-4 mr-1" /> 
+                      </button>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           {showCustomCursor && color && (
             <ColorPickerCursor color={color.hex} x={cursorPosition.x} y={cursorPosition.y} />
